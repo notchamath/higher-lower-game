@@ -9,7 +9,6 @@ def print_logo(score):
     if score > 0:
         print(f"You are right! Current score: {score}.")
 
-
 def shuffle_data():
     random.shuffle(data)
 
@@ -61,8 +60,14 @@ def start():
             break
         else:
             score += 1
-            obj1 = answer
-            obj2 = data[score+1]
+
+            if score >= (len(data) - 1):
+                print_logo(0)
+                print(f"You beat the game! Final score: {score}")
+                break
+            else:
+                obj1 = answer
+                obj2 = data[score + 1]
 
     
 start()
