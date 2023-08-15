@@ -48,10 +48,12 @@ def get_guess():
 # Get the correct answer
 def get_answer(obj1, obj2):
     """
-        Takes in 2 arguments: two dictionaries as 'obj1' and 'obj2' then returns the one with higher follower_count value
+        Takes in 2 arguments: two dictionaries as 'obj1' and 'obj2' then returns the one with higher follower_count value. Returns None if values are equal.
     """
 
-    if obj1['follower_count'] >= obj2['follower_count']:
+    if obj1['follower_count'] == obj2['follower_count']:
+        return None
+    elif obj1['follower_count'] > obj2['follower_count']:
         return obj1
     else:
         return obj2
@@ -61,9 +63,17 @@ def check_answer(guess, obj1, obj2):
     """
         Takes in 3 arguments: The user's guess as a string named 'guess' and the two comparison dictionaries as 'obj1' and 'obj2', then returns the dictionary with the higher follower_count value if the user got the guess right. Returns None if the user got it wrong.
     """
-    if guess == 'a' and obj1 == get_answer(obj1, obj2):
+    answer = get_answer(obj1, obj2)
+
+    # If follower_count of both dicts are equal, return whichever answer user picked
+    if answer == None:
+        if guess == 'a':
+            return obj1
+        else:
+            return obj2
+    elif guess == 'a' and answer == obj1:
         return obj1
-    elif guess == 'b' and obj2 == get_answer(obj1, obj2):
+    elif guess == 'b' and answer == obj2:
         return obj2
     else:
         return None
